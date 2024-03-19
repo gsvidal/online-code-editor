@@ -1,13 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Online code editor &lpar;HTML, CSS & JS&rpar;</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h1>Online Code Editor</h1>
+      <section class="menu">
+        <span class="menu-item menu-item--big-font">A +</span>
+        <span class="menu-item menu-item--small-font">A -</span>
+      </section>
+      <!-- <div class="grid">
+        <div>asaa</div>
+        <div class="gutter-col gutter-col-1"></div>
+        <div>xxxx</div>
+        <div>ddd</div>
+        <div class="gutter-row gutter-row-1"></div>
+        <div>cxfsfsd</div>
+    </div> -->
+      <section class="editors-container grid">
+        <div class="code-editor code-editor--html">
+          <label for="textarea-html">HTML</label>
+          <textarea
+            name="html"
+            id="textarea-html"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+        <div class="gutter-col gutter-col-1"></div>
+        <div class="code-editor code-editor--css">
+          <label for="textarea-css">CSS</label>
+          <textarea name="css" id="textarea-css" cols="30" rows="10"></textarea>
+        </div>
+        <div class="code-editor code-editor--js">
+          <label for="textarea-js">JS</label>
+          <textarea name="js" id="textarea-js" cols="30" rows="10"></textarea>
+        </div>
+        <div class="gutter-row gutter-row-1"></div>
+        <div class="preview-container">
+          <iframe frameborder="0" name="preview" class="preview"></iframe>
+        </div>
+      </section>
+      <!-- <div class="console-output"></div> -->
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

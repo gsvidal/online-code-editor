@@ -1,24 +1,87 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import Split from "split-grid";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+Split({
+  columnGutters: [
+    {
+      track: 1,
+      element: document.querySelector(".gutter-col-1") as HTMLElement,
+    },
+  ],
+  rowGutters: [
+    {
+      track: 1,
+      element: document.querySelector(".gutter-row-1") as HTMLElement,
+    },
+  ],
+});
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const preview = document.querySelector(".preview") as HTMLIFrameElement;
+const HTMLeditor = document.querySelector(
+  "#textarea-html"
+) as HTMLTextAreaElement;
+const CSSeditor = document.querySelector(
+  "#textarea-css"
+) as HTMLTextAreaElement;
+const JSeditor = document.querySelector("#textarea-js") as HTMLTextAreaElement;
+
+const consoleOutput = document.querySelector(
+  ".console-output"
+) as HTMLDivElement;
+
+const editors = [HTMLeditor, CSSeditor, JSeditor];
+
+document.addEventListener("DOMContentLoaded", () => {
+  HTMLeditor.textContent = `<h1>Skyhigh2</h1>  `;
+  CSSeditor.textContent = `h1 {
+  color: red;
+}`;
+  JSeditor.textContent = 'console.log("hey you")';
+
+  updatePreview();
+});
+
+editors.forEach((editor: HTMLTextAreaElement) => {
+  editor.addEventListener("input", () => {
+    updatePreview();
+  });
+});
+
+const updatePreview = () => {
+  const html = createPreviewDocument();
+  preview.setAttribute("srcdoc", html);
+};
+
+// function handleConsoleLog(message: string, ...args: any) {
+//   console.log(message);
+//   console.log(args);
+//   const logElement = document.createElement("p"); // Create a new element for each log message
+//   logElement.textContent = `${message} ${args.join(" ")}`; // Format the log message
+//   consoleOutput?.appendChild(logElement); // Add the element to the console display area
+// }
+// console.log = (...args) => handleConsoleLog("log:", ...args);
+
+const createPreviewDocument = () => {
+  const html = HTMLeditor.value;
+  const css = CSSeditor.value;
+  const js = JSeditor.value;
+
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Code editor</title>
+      <style>
+        ${css}
+      </style>
+    </head>
+    <body>
+      ${html}
+      <script>
+        ${js}
+      </script>
+      </body>
+  </html>
+  `;
+};

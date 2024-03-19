@@ -1,96 +1,125 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Background colors */
+  --bg-color: #1e1e1e; /* Main background color */
+  --bg-dark-color: #161616; /* Darker background color */
+  --bg-light-color: #2c2c2c; /* Lighter background color */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Text colors */
+  --text-color: #bdbdbd; /* Text color */
+  --text-muted-color: #aaaaaa; /* Muted text color */
+  --text-selection-color: #ffffff; /* Selected text color */
+  --text-cursor-color: #ffffff; /* Text cursor color */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Accent colors */
+  --accent-color: #4caf50; /* Accent color */
+  --accent-hover-color: #449d44; /* Accent hover color */
+  --accent-active-color: #398439; /* Accent active color */
+
+  /* Borders */
+  --border-color: #333333; /* Border color */
+
+  /* Syntax highlighting */
+  --syntax-comment-color: #6f6f6f; /* Comment color */
+  --syntax-keyword-color: #569cd6; /* Keyword color */
+  --syntax-string-color: #d69d85; /* String color */
+  --syntax-function-color: #dcdcaa; /* Function color */
+  --syntax-variable-color: #9cdcfe; /* Variable color */
+  --syntax-number-color: #b5cea8; /* Number color */
+  --syntax-operator-color: #d4d4d4; /* Operator color */
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html {
+  font-size: 62.5%;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-size: 1.4rem;
+  background-color: var(--bg-color);
+  color: var(--text-selection-color);
+  padding: 15px;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  font-size: 4rem;
+  margin: 30px 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.menu-item {
+  position: relative;
+  top: -15px;
+  padding: 4px 3px;
+  border: 1px solid grey;
+  border-radius: 4px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.editors-container {
+  display: grid;
+  grid-template-columns: 2fr 10px 1fr;
+  grid-template-rows: 1fr 10px 1fr;
+  height: calc(100vh - 180px);
+}
+
+.code-editor {
+  position: relative;
+  min-width: 250px;
+  min-height: 176px;
+}
+
+.code-editor label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: rgba(128, 128, 128, 0.486);
+}
+
+.code-editor textarea {
+  width: 100%;
+  height: 100%;
+  padding-left: 25px;
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+  background-color: var(--bg-dark-color);
+  color: var(--text-color);
+  padding-top: 10px;
+  resize: none;
+}
+
+.code-editor textarea:focus {
+  outline: 0;
+}
+
+.preview-container {
+  border: 1px solid var(--bg-dark-color);
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.gutter-col {
+  grid-row: 1/-1;
+  cursor: col-resize;
+}
+
+.gutter-col-1 {
+  grid-column: 2;
+}
+
+.gutter-row {
+  grid-column: 1/-1;
+  cursor: row-resize;
+}
+
+.gutter-row-1 {
+  grid-row: 2;
 }
