@@ -24,24 +24,56 @@ const CSSeditor = document.querySelector(
 ) as HTMLTextAreaElement;
 const JSeditor = document.querySelector("#textarea-js") as HTMLTextAreaElement;
 
-const consoleOutput = document.querySelector(
-  ".console-output"
-) as HTMLDivElement;
+// const consoleOutput = document.querySelector(
+//   ".console-output"
+// ) as HTMLDivElement;
 
-const editors = [HTMLeditor, CSSeditor, JSeditor];
+// const editors = [HTMLeditor, CSSeditor, JSeditor];
 
 document.addEventListener("DOMContentLoaded", () => {
-  HTMLeditor.textContent = `<h1>Skyhigh2</h1>  `;
-  CSSeditor.textContent = `h1 {
-  color: red;
-}`;
-  JSeditor.textContent = 'console.log("hey you")';
+  //   HTMLeditor.textContent = `<h1>Skyhigh2</h1>  `;
+  //   CSSeditor.textContent = `h1 {
+  //   color: red;
+  // }`;
+  //   JSeditor.textContent = 'console.log("hey you")';
 
   updatePreview();
 });
 
-editors.forEach((editor: HTMLTextAreaElement) => {
-  editor.addEventListener("input", () => {
+const editors = [
+  {
+    editorName: HTMLeditor,
+    rowArray: [],
+    currentRow: 1,
+  },
+  {
+    editorName: CSSeditor,
+    rowArray: [],
+    currentRow: 1,
+  },
+  {
+    editorName: JSeditor,
+    rowArray: [],
+    currentRow: 1,
+  },
+];
+
+type EditorObj = {
+  editorName: HTMLElement;
+  rowArray: string[];
+  currentRow: number;
+};
+
+// let acum = ""
+
+editors.forEach((editor: EditorObj) => {
+  editor.editorName.addEventListener("input", (event: Event) => {
+    // const enteredChar = (event.target as HTMLInputElement).value
+    // if(enteredChar === "x") {
+      
+    //   editor.rowArray.push((event.target as HTMLInputElement).value);
+    // }
+    console.log("keypress")
     updatePreview();
   });
 });
@@ -49,6 +81,8 @@ editors.forEach((editor: HTMLTextAreaElement) => {
 const updatePreview = () => {
   const html = createPreviewDocument();
   preview.setAttribute("srcdoc", html);
+  // console.log(editors)
+  // console.log(editors.join("x"))
 };
 
 // function handleConsoleLog(message: string, ...args: any) {
